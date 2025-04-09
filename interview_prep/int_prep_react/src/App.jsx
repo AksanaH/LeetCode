@@ -4,6 +4,7 @@ import "./App.css";
 const App = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -27,11 +28,23 @@ const App = () => {
     return <h2>Loading...</h2>;
   }
 
+  const filteredProducts = products.filter((product) =>
+    product.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  console.log(filteredProducts);
   return (
     <div>
       <h1>Fake Store</h1>
+      <input
+        type="text"
+        placeholder="Search products..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        style={{ padding: "8px", marginBottom: "20px", width: "300px" }}
+      />
       <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <div
             key={product.id}
             style={{
