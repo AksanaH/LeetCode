@@ -5,6 +5,7 @@ const App = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -32,6 +33,34 @@ const App = () => {
     product.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const addToCart = (product) => {
+    setCart((prevCart) => {
+      const itemInCart = prevCart.find((item) => item.id === product.id);
+      if (itemInCart) {
+        return prevCart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      } else {
+        return [...prevCart, { ...product, quantity: 1 }];
+      }
+    });
+  };
+
+  const removeFromCart = (id) => {
+    setCart((prevCart) => {
+      const item = prevCart.find((item) => item.id === id);
+      if (item.quantity > 1) {
+        return prevCart.map((item) =>
+          item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+        );
+      } else {
+        return prevCart.filter((item) => item.id !== id);
+      }
+    });
+  };
+
   console.log(filteredProducts);
   return (
     <div>
@@ -43,7 +72,10 @@ const App = () => {
         onChange={(e) => setSearchTerm(e.target.value)}
         style={{ padding: "8px", marginBottom: "20px", width: "300px" }}
       />
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
+      <div
+        className="product-container"
+        style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}
+      >
         {filteredProducts.map((product) => (
           <div
             key={product.id}
@@ -65,6 +97,19 @@ const App = () => {
             />
             <h3>{product.title}</h3>
             <p>${product.price}</p>
+            <button onClick={() => addToCart(product)}>Add to Cart</button>
+          </div>
+        ))}
+      </div>
+      <h2>Cart</h2>
+      <div className="cart-container">
+        {cart.map((item) => (
+          <div key={item.id} className="card">
+            <img src={item.image} alt={item.title} />
+            <h3>{item.title}</h3>
+            <p>${item.price}</p>
+            <p>Quantity: {item.quantity}</p>
+            <button onClick={() => removeFromCart(item.id)}>Remove</button>
           </div>
         ))}
       </div>
