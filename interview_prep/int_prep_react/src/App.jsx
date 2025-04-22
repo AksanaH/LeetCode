@@ -113,6 +113,14 @@ const App = () => {
           </div>
         ))}
       </div>
+      <div>
+        <h2>
+          Total Amount: $
+          {cart
+            .reduce((total, item) => total + item.price * item.quantity, 0)
+            .toFixed(2)}
+        </h2>
+      </div>
     </div>
   );
 };
