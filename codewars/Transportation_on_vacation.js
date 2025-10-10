@@ -22,4 +22,3 @@ function rentalCarCost(d) {
 }
 
 console.log(rentalCarCost(8));
-console.log(rentalCarCost(3));
