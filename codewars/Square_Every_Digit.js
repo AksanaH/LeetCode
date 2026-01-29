@@ -24,5 +24,11 @@ function squareDigits(num) {
     return parseInt(resultStr);
 }
 
+// or
+
+function squareDigits(num) {
+    return Number(num.toString().split('').map(el => el * el).join(''));
+}
+
 console.log(squareDigits(765));
 console.log(squareDigits(9119));
