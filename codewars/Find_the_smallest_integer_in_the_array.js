@@ -10,3 +10,10 @@ function findSmallestInt(arr) {
 
 console.log(findSmallestInt([1, 2, 3, -50]));
 console.log(findSmallestInt([34, 2, 67]));
+
+function findSmallestInt(arr) {
+    return Math.min(...arr);
+}
+
+console.log(findSmallestInt([1, 2, 3, -50]));
+console.log(findSmallestInt([34, 2, 67]));
