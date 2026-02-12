@@ -25,3 +25,18 @@ console.log(twoSum([1, 2, 3], 4));
 console.log(twoSum([3, 2, 4], 6));
 console.log(twoSum([32, 21, 45, 56, 1], 22));
 
+function twoSumExists(arr, target) {
+    let seen = {};
+    for (let num of arr) {
+        let need = target - num;
+        if (need in seen) {
+            return true
+        } else {
+            seen[num] = true;
+        }
+    }
+    return false;
+}
+console.log(twoSumExists([1, 2, 3], 4));
+console.log(twoSumExists([3, 2, 4], 8));
+
