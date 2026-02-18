@@ -39,4 +39,3 @@ function twoSumExists(arr, target) {
 }
 console.log(twoSumExists([1, 2, 3], 4));
 console.log(twoSumExists([3, 2, 4], 8));
-
