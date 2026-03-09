@@ -2,10 +2,12 @@
 //  reverse order.
 
 function reverseList(list) {
-    let reversedList = [];
-    for (let i = list.length - 1; i >= 0; i--) {
-        let current = list[i];
-        reversedList.push(current);
-    }
-    return reversedList
+  let reversedList = [];
+  for (let i = list.length - 1; i >= 0; i--) {
+    let current = list[i];
+    reversedList.push(current);
+  }
+  return reversedList;
 }
+
+console.log(reverseList([1, "fdr", "jjj", 67]));
